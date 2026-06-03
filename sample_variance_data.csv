@@ -1,0 +1,6 @@
+Month,Cost_Center,Category,Budget,Actual,Driver
+May,Assembly Labor,Labor,500000,575000,Overtime usage increased due to production delays
+May,Procurement,Material,300000,345000,Supplier price increases on purchased components
+May,Engineering Support,Contractor,225000,205000,Lower contractor utilization than planned
+May,Quality Inspection,Labor,180000,210000,Additional inspection hours required
+May,Maintenance,Expense,95000,88000,Fewer repair events than forecasted
