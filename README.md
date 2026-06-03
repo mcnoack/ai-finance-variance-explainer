@@ -38,6 +38,22 @@ A finance analyst uploads monthly cost center data. The tool identifies the larg
 
 This project uses fake sample data only. It does not include any company data, proprietary information, internal reports, or confidential business details.
 
+## Example Output
+
+```text
+Top Variance Drivers
+--------------------
+Assembly Labor was unfavorable by $75,000. Primary driver: Overtime usage increased due to production delays.
+Procurement was unfavorable by $45,000. Primary driver: Supplier price increases on purchased components.
+Quality Inspection was unfavorable by $30,000. Primary driver: Additional inspection hours required.
+Engineering Support was favorable by $-20,000. Primary driver: Lower contractor utilization than planned.
+Maintenance was favorable by $-7,000. Primary driver: Fewer repair events than forecasted.
+
+Draft Leadership Commentary
+---------------------------
+Overall results were unfavorable by $123,000. The largest unfavorable drivers were related to labor and material cost increases. These were partially offset by favorable contractor and maintenance spending. Recommended follow-up areas include overtime usage, supplier price changes, and quality inspection requirements.
+```
+
 ## Project Status
 
 In progress.
