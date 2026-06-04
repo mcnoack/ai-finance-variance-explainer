@@ -16,8 +16,9 @@ print("--------------------")
 
 for _, row in top_variances.iterrows():
     favorability = "unfavorable" if row["Variance"] > 0 else "favorable"
+    amount = abs(row["Variance"])
     print(
-        f"{row['Cost_Center']} was {favorability} by ${row['Variance']:,.0f}. "
+        f"{row['Cost_Center']} was {favorability} by ${amount:,.0f}. "
         f"Primary driver: {row['Driver']}."
     )
 
