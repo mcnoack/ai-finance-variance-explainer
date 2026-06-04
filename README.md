@@ -46,8 +46,8 @@ Top Variance Drivers
 Assembly Labor was unfavorable by $75,000. Primary driver: Overtime usage increased due to production delays.
 Procurement was unfavorable by $45,000. Primary driver: Supplier price increases on purchased components.
 Quality Inspection was unfavorable by $30,000. Primary driver: Additional inspection hours required.
-Engineering Support was favorable by $-20,000. Primary driver: Lower contractor utilization than planned.
-Maintenance was favorable by $-7,000. Primary driver: Fewer repair events than forecasted.
+Engineering Support was favorable by $20,000. Primary driver: Lower contractor utilization than planned.
+Maintenance was favorable by $7,000. Primary driver: Fewer repair events than forecasted.
 
 Draft Leadership Commentary
 ---------------------------
