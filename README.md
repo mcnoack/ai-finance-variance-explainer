@@ -2,58 +2,52 @@
 
 ## Overview
 
-This project is a simple AI-assisted finance analysis tool. It uses fake sample budget vs. actual data to identify major variances and generate plain-English commentary for business users.
+This project is an automated financial variance analysis pipeline. It takes budget vs. actual cost data, isolates key variances, and creates clear executive commentary for leadership.
 
-The goal is to demonstrate how AI, automation, and analytics can support finance teams by reducing manual work and improving the speed and consistency of variance explanations.
+Having spent 8 years in corporate finance, I built this to eliminate the manual, repetitive work of month-end reporting—while addressing two critical technical constraints: ensuring 100% mathematical accuracy and keeping sensitive cost data private.
 
 ## Business Problem
 
-Finance analysts often spend time reviewing budget vs. actual results, identifying major drivers, and writing commentary for leadership. This process can be repetitive, especially when working with large Excel files or recurring monthly reports.
+Finance analysts spend hours every month recalculating variances in Excel, digging through cost centers, and drafting executive explanations from scratch. 
 
-## Solution
+While generative AI seems like an obvious solution, applying off-the-shelf chatbots to corporate finance creates two major risks:
+1. **AI is bad at math:** Generative models predict words rather than calculating equations. Allowing an LLM to compute variance totals or percentages leads to hallucinations and audit failures.
+2. **Data security:** In defense and manufacturing environments, cost center actuals, labor rates, and supplier pricing cannot be uploaded to public cloud APIs like ChatGPT.
 
-This project will:
+## How This Project Solves It
 
-- Load fake budget vs. actual data
-- Calculate favorable and unfavorable variances
-- Identify the largest drivers
-- Generate a first-draft business explanation
-- Provide follow-up questions for the analyst to investigate
+- **Python & Pandas handle all calculations:** All variance math (actual vs. budget, percentage changes, net totals, and ranking) is computed deterministically in code. The AI never calculates numbers; it only interprets the finished math.
+- **Runs 100% locally and offline:** The pipeline runs an open-source model (`llama3.2:3b`) on-device using Ollama. No data leaves the machine, satisfying zero-egress and defense-style privacy constraints.
+- **Strict output structure via Pydantic:** Instead of generic chatbot text, the model is constrained by a schema that guarantees consistent outputs: an Executive Summary, Key Risks, and Recommended Analyst Inquiries.
 
-## Example Use Case
+## Architecture & Tech Stack
 
-A finance analyst uploads monthly cost center data. The tool identifies the largest unfavorable variances and creates a draft explanation that can be reviewed, edited, and used in a leadership update.
-
-## Skills Demonstrated
-
-- Python
-- Pandas
-- Excel/CSV data handling
-- Finance analysis
-- Variance analysis
-- AI prompting
-- Business communication
-
-## Data Note
-
-This project uses fake sample data only. It does not include any company data, proprietary information, internal reports, or confidential business details.
+- **Python:** Core pipeline logic
+- **Pandas:** Exact financial arithmetic, sorting, and data structuring
+- **Pydantic:** Schema validation to enforce structured JSON outputs
+- **Ollama (`llama3.2:3b`):** Local, on-premise language model running via Apple Silicon Metal acceleration
 
 ## Example Output
 
 ```text
-Top Variance Drivers
---------------------
-Assembly Labor was unfavorable by $75,000. Primary driver: Overtime usage increased due to production delays.
-Procurement was unfavorable by $45,000. Primary driver: Supplier price increases on purchased components.
-Quality Inspection was unfavorable by $30,000. Primary driver: Additional inspection hours required.
-Engineering Support was favorable by $20,000. Primary driver: Lower contractor utilization than planned.
-Maintenance was favorable by $7,000. Primary driver: Fewer repair events than forecasted.
+=== TOP VARIANCE DRIVERS (Deterministic Math) ===
+Assembly Labor         | Unfavorable | $    75,000 ( +15.0%) | Driver: Overtime usage increased due to production delays
+Procurement            | Unfavorable | $    45,000 ( +15.0%) | Driver: Supplier price increases on purchased components
+Quality Inspection     | Unfavorable | $    30,000 ( +16.7%) | Driver: Additional inspection hours required
+Engineering Support    | Favorable   | $    20,000 (  -8.9%) | Driver: Lower contractor utilization than planned
+Maintenance            | Favorable   | $     7,000 (  -7.4%) | Driver: Fewer repair events than forecasted
 
-Draft Leadership Commentary
----------------------------
-Overall results were unfavorable by $123,000. The largest unfavorable drivers were related to labor and material cost increases. These were partially offset by favorable contractor and maintenance spending. Recommended follow-up areas include overtime usage, supplier price changes, and quality inspection requirements.
-```
+=== GENERATING LOCAL AI COMMENTARY (Ollama Offline) ===
 
-## Project Status
+Executive Summary:
+The current financial performance of our organization is characterized by an unfavorable net performance of $123,000.00, a total unfavorable drift of $150,000.00, and a total favorable offset of $-27,000.00. The primary drivers of these unfavorable variances are the increased overtime usage in Assembly Labor due to production delays, supplier price increases on purchased components in Procurement, and additional inspection hours required in Quality Inspection. Lower contractor utilization in Engineering Support and fewer repair events in Maintenance provided partial offsets.
 
-In progress.
+Key Risks:
+- Increased overtime usage in Assembly Labor due to production delays
+- Supplier price increases on purchased components in Procurement
+- Additional inspection hours required in Quality Inspection
+
+Recommended Analyst Inquiries:
+- Implement measures to reduce overtime usage in Assembly Labor
+- Negotiate with suppliers to mitigate price increases on purchased components
+- Optimize inspection processes to reduce additional hours required
